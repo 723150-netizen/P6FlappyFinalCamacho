@@ -8,7 +8,7 @@ public class Column : MonoBehaviour
     { 
          if (collision.gameObject.GetComponent<Bird>() != null)
         {
-            GameControl.instance.BirdScored();
+            GameControl.Instance.BirdScored();
         }
     }
 }

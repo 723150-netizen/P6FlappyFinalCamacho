@@ -3,53 +3,49 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-
+using TMPro;
 
 public class GameControl : MonoBehaviour
 {
     private int score = 0;
 
-    public static GameControl instance;
+    public static GameControl Instance;
+
     public GameObject gameOverText;
-    public Text scoreText;
+    public TMP_Text scoreText;
+
     public bool gameOver = false;
     public float scrollSpeed = -1.5f;
 
-    // Start is called before the first frame update
-    void Awake ()
+    void Awake()
     {
-        if (instance == null)
-        { 
-            instance = this;
-        } else if (instance != this)
-        {
+        if (Instance == null)
+            Instance = this;
+        else
             Destroy(gameObject);
-        }
+
+        scoreText.text = "Score: 0";
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (gameOver == true && Input.GetMouseButtonDown(0))
+        if (gameOver && Input.GetMouseButtonDown(0))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-    
     }
-    
+
     public void BirdScored()
     {
-        if (gameOver)
-        {
-            return;
-        }
+        if (gameOver) return;
+
         score++;
-        scoreText.text = "Score: " + score.ToString();
+        scoreText.text = "Score: " + score;
     }
+
     public void BirdDied()
-    { 
-        gameOverText.SetActive (true);
+    {
+        gameOverText.SetActive(true);
         gameOver = true;
     }
 }
