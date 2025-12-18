@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Column : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D (Collision2D collision)
     { 
-         if (collision.gameObject.GetComponent<Bird>() != null)
+         if (gameObject.GetComponent<Bird>() != null)
         {
-            GameControl.Instance.BirdScored();
+            GameControl.instance.BirdScored();
         }
     }
 }

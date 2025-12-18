@@ -3,27 +3,29 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+using UnityEngine.UI;
+
 
 public class GameControl : MonoBehaviour
 {
-    private int score = 0;
 
-    public static GameControl Instance;
-
+    public static GameControl instance;
     public GameObject gameOverText;
-    public TMP_Text scoreText;
-
     public bool gameOver = false;
     public float scrollSpeed = -1.5f;
+    public Text scoreText;
+
+    private int score = 0;
 
     void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
+        if (instance == null)
+            instance = this; 
 
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
         scoreText.text = "Score: 0";
     }
 
@@ -37,10 +39,12 @@ public class GameControl : MonoBehaviour
 
     public void BirdScored()
     {
-        if (gameOver) return;
-
+        if (gameOver)
+        {
+            return;
+        }
         score++;
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Score: " + score.ToString ();
     }
 
     public void BirdDied()
